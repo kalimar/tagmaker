@@ -1,7 +1,18 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+PromoCode.destroy_all
+MmcVendor.destroy_all
+MmcCategory.destroy_all
+MmcPlacement.destroy_all
+MmcItem.destroy_all
+
+3.times do |w|
+  mmc_vendor = MmcVendor.create(name: "mmc_vendor: #{w}")
+  3.times do |x|
+    mmc_category = MmcCategory.create(name: "mmc_category: #{w}.#{x}")
+    3.times do |y|
+      mmc_placement = MmcPlacement.create(name: "mmc_placement: #{w}.#{x}.#{y}")
+      3.times do |z|
+        mmc_item = MmcItem.create(name: "mmc_item: #{w}.#{x}.#{y}.#{z}")
+      end
+    end
+  end
+end
