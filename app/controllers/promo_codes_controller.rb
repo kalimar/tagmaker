@@ -11,7 +11,14 @@ class PromoCodesController < ApplicationController
   end
 
   def create
-    PromoCode.create(promo_code_params)
+    # PromoCode.create(promo_code_params)
+    @mmc_vendors = MmcVendor.all
+    @mmc_categories = MmcCategory.all
+    @mmc_placements = MmcPlacement.all
+    @mmc_items = MmcItem.all
+    @pc_departments = PcDepartment.all
+    @pc_channels = PcChannel.all
+    @pc_programs = PcProgram.all
   end
 
   def update_mmc_categories
