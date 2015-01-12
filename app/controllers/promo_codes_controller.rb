@@ -5,6 +5,9 @@ class PromoCodesController < ApplicationController
     @mmc_categories = MmcCategory.all
     @mmc_placements = MmcPlacement.all
     @mmc_items = MmcItem.all
+    @pc_departments = PcDepartment.all
+    @pc_channels = PcChannel.all
+    @pc_programs = PcProgram.all
   end
 
   def create
@@ -42,6 +45,17 @@ class PromoCodesController < ApplicationController
       format.html
       format.js
     end
+  end
+
+  def update_pc_channels
+    pc_department = PcDepartment.find(params[:pc_departments_id])
+    @pc_channels = pc_department.pc_channels.map{ |c| [c.name, c.id]}.insert(0, "Select PC Channel")
+    @pc_programs = pc_department.pc_programs.map{ |p| [p.name, p.id]}.insert(0, "Select PC Program")
+  end
+
+  def update_pc_programs
+    pc_channel = PcChannel.find(params[:pc_channels_id])
+    @pc_programs = pc_channel.pc_programs.map{ |p| [p.name, p.id]}.insert(0, "Select PC Program")
   end
 
   def promo_code_params
