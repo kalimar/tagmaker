@@ -1,0 +1,25 @@
+<h1>Hello promo codes </h1>
+
+<%= collection_select(nil, :mmc_vendor_id, @mmc_vendors, :id, :name, {prompt: "Select an MMC Vendor"}, {id: "mmc_vendors_select"}) %>
+
+<%= collection_select(nil, :mmc_category_id, @mmc_categories, :id, :name, {prompt: "Select an MMC Category"}, {id: "mmc_categories_select"}) %>
+
+<%= collection_select(nil, :mmc_placement_id, @mmc_placements, :id, :name, {prompt: "Select an MMC Placement"}, {id: "mmc_placements_select"}) %>
+
+<%= collection_select(nil, :mmc_item_id, @mmc_items, :id, :name, {prompt: "Select an MMC Item"}, {id: "mmc_items_select"}) %>
+
+
+
+<script>
+  $(document).ready(function() {
+    $('#mmc_vendors_select').change(function(){
+      $.ajax({
+        url: "<%= update_mmc_categories_path %>",
+        data: {
+          mmc_vendors_id : $('#mmc_vendors_select').val()
+        },
+        dataType: "script"
+      });
+    });
+  })
+</script>
