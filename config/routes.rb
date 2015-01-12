@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+
   get 'promo_codes/update_mmc_categories', :as => 'update_mmc_categories'
   get 'promo_codes/update_mmc_placements', :as => 'update_mmc_placements'
   get 'promo_codes/update_mmc_items', :as => 'update_mmc_items'
   get 'promo_codes/update_pc_channels', :as => 'update_pc_channels'
   get 'promo_codes/update_pc_programs', :as => 'update_pc_programs'
-  root :to => "promo_codes#create"
+
+  resources :promo_codes
+  root :to => "promo_codes#new"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,5 +1,6 @@
 TODO:
-Add tests for:
+* add notes column to promo_code model 
+* Add tests for:
 
 
 

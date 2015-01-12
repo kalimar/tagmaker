@@ -1,4 +1,11 @@
-<h1>Hello promo codes </h1>
+<h1>Helloooooooo promo codes </h1>
+
+
+<%= form_for(@promo_code) do |f| %>
+  <%= f.text_field :friendly_name %>
+  <%= f.text_field :base_url %>
+  <%= f.submit %>
+<% end %>
 
 <%= collection_select(nil, :mmc_vendors_id, @mmc_vendors, :id, :name, {prompt: "Select an MMC Vendor"}, {id: "mmc_vendors_select"}) %>
 
