@@ -7,9 +7,14 @@
 <%= collection_select(nil, :mmc_placements_id, @mmc_placements, :id, :name, {prompt: "Select an MMC Placement"}, {id: "mmc_placements_select"}) %>
 
 <%= collection_select(nil, :mmc_items_id, @mmc_items, :id, :name, {prompt: "Select an MMC Item"}, {id: "mmc_items_select"}) %>
+</br>
 
+<%= collection_select(nil, :pc_departments_id, @pc_departments, :id, :name, {prompt: "Select a PC Department"}, {id: "pc_departments_select"}) %>
 
+<%= collection_select(nil, :pc_channels_id, @pc_channels, :id, :name, {prompt: "Select a PC Channel"}, {id: "pc_channels_select"}) %>
 
+<%= collection_select(nil, :pc_programs_id, @pc_programs, :id, :name, {prompt: "Select a PC Program"}, {id: "pc_programs_select"}) %>
+</br>
 <script>
   $(document).ready(function() {
     $('#mmc_vendors_select').change(function(){
@@ -35,6 +40,24 @@
         url: "<%= update_mmc_items_path %>",
         data: {
           mmc_placements_id : $('#mmc_placements_select').val()
+        },
+        dataType: "script"
+      });
+    });
+    $('#pc_departments_select').change(function(){
+      $.ajax({
+        url: "<%= update_pc_channels_path %>",
+        data: {
+          pc_departments_id : $('#pc_departments_select').val()
+        },
+        dataType: "script"
+      });
+    });
+    $('#pc_channels_select').change(function(){
+      $.ajax({
+        url: "<%= update_pc_programs_path %>",
+        data: {
+          pc_channels_id : $('#pc_channels_select').val()
         },
         dataType: "script"
       });
