@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112140748) do
+ActiveRecord::Schema.define(version: 20150112193438) do
 
   create_table "mmc_categories", force: :cascade do |t|
     t.integer  "mmc_vendor_id"
@@ -48,6 +48,33 @@ ActiveRecord::Schema.define(version: 20150112140748) do
   end
 
   add_index "mmc_vendors", ["promo_code_id"], name: "index_mmc_vendors_on_promo_code_id"
+
+  create_table "pc_channels", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "pc_department_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "pc_channels", ["pc_department_id"], name: "index_pc_channels_on_pc_department_id"
+
+  create_table "pc_departments", force: :cascade do |t|
+    t.integer  "promo_code_id"
+    t.string   "name"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "pc_departments", ["promo_code_id"], name: "index_pc_departments_on_promo_code_id"
+
+  create_table "pc_programs", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "pc_channel_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "pc_programs", ["pc_channel_id"], name: "index_pc_programs_on_pc_channel_id"
 
   create_table "promo_codes", force: :cascade do |t|
     t.string   "base_url"
