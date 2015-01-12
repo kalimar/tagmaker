@@ -27,10 +27,6 @@ class PromoCodesController < ApplicationController
     @mmc_placements = mmc_vendor.mmc_placements.map{ |p| [p.name, p.id]}.insert(0, "Select MMC Placement")
     @mmc_items = mmc_vendor.mmc_items.map { |i| [i.name, i.id]}.insert(0, "Select MMC Item")
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def update_mmc_placements
@@ -38,20 +34,12 @@ class PromoCodesController < ApplicationController
     @mmc_placements = mmc_category.mmc_placements.map{ |p| [p.name, p.id]}.insert(0, "Select placement")
     @mmc_items = mmc_category.mmc_items.map{ |i| [i.name, i.id]}.insert(0, "Select item")
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def update_mmc_items
     mmc_placement = MmcPlacement.find(params[:mmc_placements_id])
     @mmc_items = mmc_placement.mmc_items.map { |i| [i.name, i.id]}.insert(0, "Select item")
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def update_pc_channels
