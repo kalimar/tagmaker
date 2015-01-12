@@ -1,12 +1,12 @@
 <h1>Hello promo codes </h1>
 
-<%= collection_select(nil, :mmc_vendor_id, @mmc_vendors, :id, :name, {prompt: "Select an MMC Vendor"}, {id: "mmc_vendors_select"}) %>
+<%= collection_select(nil, :mmc_vendors_id, @mmc_vendors, :id, :name, {prompt: "Select an MMC Vendor"}, {id: "mmc_vendors_select"}) %>
 
-<%= collection_select(nil, :mmc_category_id, @mmc_categories, :id, :name, {prompt: "Select an MMC Category"}, {id: "mmc_categories_select"}) %>
+<%= collection_select(nil, :mmc_categories_id, @mmc_categories, :id, :name, {prompt: "Select an MMC Category"}, {id: "mmc_categories_select"}) %>
 
-<%= collection_select(nil, :mmc_placement_id, @mmc_placements, :id, :name, {prompt: "Select an MMC Placement"}, {id: "mmc_placements_select"}) %>
+<%= collection_select(nil, :mmc_placements_id, @mmc_placements, :id, :name, {prompt: "Select an MMC Placement"}, {id: "mmc_placements_select"}) %>
 
-<%= collection_select(nil, :mmc_item_id, @mmc_items, :id, :name, {prompt: "Select an MMC Item"}, {id: "mmc_items_select"}) %>
+<%= collection_select(nil, :mmc_items_id, @mmc_items, :id, :name, {prompt: "Select an MMC Item"}, {id: "mmc_items_select"}) %>
 
 
 
@@ -21,5 +21,23 @@
         dataType: "script"
       });
     });
-  })
+    $('#mmc_categories_select').change(function(){
+      $.ajax({
+        url: "<%= update_mmc_placements_path %>",
+        data: {
+          mmc_categories_id : $('#mmc_categories_select').val()
+        },
+        dataType: "script"
+      });
+    });
+    $('#mmc_placements_select').change(function(){
+      $.ajax({
+        url: "<%= update_mmc_items_path %>",
+        data: {
+          mmc_placements_id : $('#mmc_placements_select').val()
+        },
+        dataType: "script"
+      });
+    });
+  });
 </script>
