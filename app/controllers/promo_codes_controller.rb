@@ -1,4 +1,5 @@
 class PromoCodesController < ApplicationController
+  include PromoCodesHelper
 
   def index
   end
@@ -19,6 +20,11 @@ class PromoCodesController < ApplicationController
 
   def create
     @promo_code = PromoCode.new(promo_code_params)
+    @promo_code.mmc_code = mmc_code_builder @promo_code
+
+    promo_code_string = "URL MMC Department Channel Program Prefix Friendly_Name Reporting_Channel \n"
+    promo_code_string += "#{@promo_code.base_url}"
+
 
     respond_to do |format|
       if @promo_code.save
