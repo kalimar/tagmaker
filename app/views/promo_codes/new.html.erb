@@ -14,11 +14,11 @@
   <%= f.collection_select(:mmc_item_id, @mmc_items, :id, :name, {prompt: "Select an MMC Item"}, {id: "mmc_items_select"}) %>
   </br>
 
-  <%= collection_select(nil, :pc_departments_id, @pc_departments, :id, :name, {prompt: "Select a PC Department"}, {id: "pc_departments_select"}) %>
+  <%= f.collection_select(:pc_department_id, @pc_departments, :id, :name, {prompt: "Select a PC Department"}, {id: "pc_departments_select"}) %>
 
-  <%= collection_select(nil, :pc_channels_id, @pc_channels, :id, :name, {prompt: "Select a PC Channel"}, {id: "pc_channels_select"}) %>
+  <%= f.collection_select(:pc_channel_id, @pc_channels, :id, :name, {prompt: "Select a PC Channel"}, {id: "pc_channels_select"}) %>
 
-  <%= collection_select(nil, :pc_programs_id, @pc_programs, :id, :name, {prompt: "Select a PC Program"}, {id: "pc_programs_select"}) %>
+  <%= f.collection_select(:pc_program_id, @pc_programs, :id, :name, {prompt: "Select a PC Program"}, {id: "pc_programs_select"}) %>
 </br>
   <%= f.text_field :reporting_channel, :value => "Other" %>
 </br>

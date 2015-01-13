@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113131601) do
+ActiveRecord::Schema.define(version: 20150113142646) do
 
   create_table "mmc_categories", force: :cascade do |t|
     t.integer  "mmc_vendor_id"
@@ -87,11 +87,18 @@ ActiveRecord::Schema.define(version: 20150113131601) do
     t.string   "mmc_code"
     t.string   "tracking_url"
     t.string   "primary_tracking_code"
+    t.string   "promo_code"
+    t.integer  "pc_channel_id"
+    t.integer  "pc_department_id"
+    t.integer  "pc_program_id"
   end
 
   add_index "promo_codes", ["mmc_category_id"], name: "index_promo_codes_on_mmc_category_id"
   add_index "promo_codes", ["mmc_item_id"], name: "index_promo_codes_on_mmc_item_id"
   add_index "promo_codes", ["mmc_placement_id"], name: "index_promo_codes_on_mmc_placement_id"
   add_index "promo_codes", ["mmc_vendor_id"], name: "index_promo_codes_on_mmc_vendor_id"
+  add_index "promo_codes", ["pc_channel_id"], name: "index_promo_codes_on_pc_channel_id"
+  add_index "promo_codes", ["pc_department_id"], name: "index_promo_codes_on_pc_department_id"
+  add_index "promo_codes", ["pc_program_id"], name: "index_promo_codes_on_pc_program_id"
 
 end
