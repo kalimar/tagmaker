@@ -5,6 +5,7 @@ class PromoCodesController < ApplicationController
   end
 
   def show
+    @promo_code = PromoCode.find(params[:id])
   end
 
   def new
