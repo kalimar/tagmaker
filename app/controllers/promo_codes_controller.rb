@@ -59,6 +59,8 @@ class PromoCodesController < ApplicationController
   end
 
   def promo_code_params
-    params.require(:promo_code).permit(:friendly_name, :base_url)
+    params.require(:promo_code).permit(:friendly_name, :base_url,
+                                        :mmc_vendor_id, :mmc_category_id,
+                                        :mmc_placement_id, :mmc_item_id)
   end
 end

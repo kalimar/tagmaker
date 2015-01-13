@@ -1,6 +1,6 @@
 class PromoCode < ActiveRecord::Base
-  # attr_accessible :friendly_name, :base_url
-
-  has_many :mmc_vendors
-  has_many :mmc_categories, :through => :mmc_vendors
+  has_one :mmc_vendor
+  has_one :mmc_category
+  has_one :mmc_placement
+  has_one :mmc_item
 end

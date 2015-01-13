@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112193438) do
+ActiveRecord::Schema.define(version: 20150113040742) do
 
   create_table "mmc_categories", force: :cascade do |t|
     t.integer  "mmc_vendor_id"
@@ -41,13 +41,10 @@ ActiveRecord::Schema.define(version: 20150112193438) do
   add_index "mmc_placements", ["mmc_category_id"], name: "index_mmc_placements_on_mmc_category_id"
 
   create_table "mmc_vendors", force: :cascade do |t|
-    t.integer  "promo_code_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "name"
   end
-
-  add_index "mmc_vendors", ["promo_code_id"], name: "index_mmc_vendors_on_promo_code_id"
 
   create_table "pc_channels", force: :cascade do |t|
     t.string   "name"
@@ -79,8 +76,17 @@ ActiveRecord::Schema.define(version: 20150112193438) do
   create_table "promo_codes", force: :cascade do |t|
     t.string   "base_url"
     t.string   "friendly_name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "mmc_vendor_id"
+    t.integer  "mmc_category_id"
+    t.integer  "mmc_item_id"
+    t.integer  "mmc_placement_id"
   end
+
+  add_index "promo_codes", ["mmc_category_id"], name: "index_promo_codes_on_mmc_category_id"
+  add_index "promo_codes", ["mmc_item_id"], name: "index_promo_codes_on_mmc_item_id"
+  add_index "promo_codes", ["mmc_placement_id"], name: "index_promo_codes_on_mmc_placement_id"
+  add_index "promo_codes", ["mmc_vendor_id"], name: "index_promo_codes_on_mmc_vendor_id"
 
 end
