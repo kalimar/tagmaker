@@ -26,7 +26,6 @@
 
   <%= f.collection_select(:pc_program_id, @pc_programs, :id, :name, {prompt: "Select a PC Program"}, {id: "pc_programs_select"}) %>
 </br>
-  <%= f.text_field :reporting_channel, :value => "Other" %>
 </br>
   <%= f.text_area :notes, {placeholder: "Notes"} %>
 </br>
