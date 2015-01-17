@@ -63,12 +63,14 @@ class PromoCodesController < ApplicationController
     @pc_programs = pc_channel.pc_programs.map{ |p| [p.name, p.id]}.insert(0, "Select PC Program")
   end
 
-  def promo_code_params
-    params.require(:promo_code).permit(:friendly_name, :base_url,
-                                        :mmc_vendor_id, :mmc_category_id,
-                                        :mmc_placement_id, :mmc_item_id,
-                                        :notes, :reporting_channel,
-                                        :pc_department_id, :pc_channel_id,
-                                        :pc_program_id)
-  end
+  private
+    def promo_code_params
+      params.require(:promo_code).permit(:friendly_name, :base_url,
+                                          :mmc_vendor_id, :mmc_category_id,
+                                          :mmc_placement_id, :mmc_item_id,
+                                          :notes, :reporting_channel,
+                                          :pc_department_id, :pc_channel_id,
+                                          :pc_program_id)
+    end
+
 end
