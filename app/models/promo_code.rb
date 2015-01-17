@@ -7,7 +7,7 @@ class PromoCode < ActiveRecord::Base
   has_one :pc_channel
   has_one :pc_program
 
-  def mmc_code_builder
+  def mmc_code
     mmc_code = ""
     mmc_code += self.url_has_params? ? "&" : "?"
     mmc_code += "cm_mmc="
@@ -19,6 +19,8 @@ class PromoCode < ActiveRecord::Base
     mmc_code += "-_-"
     mmc_code += "#{MmcItem.find(self.mmc_item_id).name}"
   end
+
+
   def url_has_params?
     /\?/.match(self.base_url)
   end
