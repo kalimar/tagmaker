@@ -1,9 +1,5 @@
 TODO:
-* Delete mmc code column from promo_code table. This can just be calculated when needed.
-* Delete promo_code from promo_code table. This can be pulled out of the PC_appended_url.
-* Double check names of all fields so they match the spreadsheet.
-* Move methods from promo_code_helper to promo_code Model. Methods on promo_code objects should be in the model.
-  * What happens in a session?
+* What happens in a session?
   * User saves a promo_code. This displays a table with the saved promo_code.
   * Each additional promo_code saved gets appended to the table.
   * User then clicks 'generate snippet'. This goes to the next screen which displays the code snippet, containing all the promo_codes that were saved.
@@ -11,13 +7,35 @@ TODO:
   * If the user ends the session without adding all of the PC_appended_urls, it's ok. They should be able to do that in promo_code/show.
 * Can a user edit a promo_code once it's been completed? Or better to just delete and start over?
 
+  * where does the code for the snippet go?
 
+* figure out best way to clear session array
 * Add tests for:
   *  See notebook with testing ideas
 
 
-Nice to have:
+###Nice to have:
 * reset fields when you have none selected.
 * Should you filter in both directions? i.e. selecting an item, modifies the three higher categories
 * validate if the fields are properly matched up?
 * User can create a PC_appended_url with only MMC_codes or only PC_codes
+
+
+
+###DONE!!!
+* Delete mmc code column from promo_code table. This can just be calculated when needed.
+* Delete promo_code from promo_code table. This can be pulled out of the PC_appended_url.
+* Double check names of all fields so they match the spreadsheet.
+* Move methods from promo_code_helper to promo_code Model. Methods on promo_code objects should be in the model.
+
+###Strategy for Creating a Session
+1. Creating a new promo_code does not redirect to a different view. It just calls some javascript that appends the relevant info in a table
+2. Creating a new promo_code sends the promo_code to the session hash
+3. Generating the snippet, goes to a new screen, displays the snippet and a table with all of the newly generated promo_codes.
+ffer a link on the snippet page to go else where. All links on this page should delete the session, do this with `before_action` :new_session, only: [:foo, :bang, :baz]
+4. Needs a promo_code partial. Uses javascript like in ReadingList for showing books
+
+
+The session controller is going to handle all batch work for promo_codes. session/show/html.erb shows you the snippet with
+create a partial just for upate_pc_appended_url. Use this in book/show, and in session/show.
+session/create should be used for creating a promo_code and renders the promo_code create partial ( this will be called _form.html.erb)
