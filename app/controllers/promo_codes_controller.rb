@@ -1,13 +1,16 @@
 class PromoCodesController < ApplicationController
+  before_action :set_promo_code, only: [:show, :edit, :update, :destroy]
 
   def index
+    @promo_codes = PromoCode.all
   end
 
   def show
-    @promo_code = PromoCode.find(params[:id])
   end
 
   def new
+    @promo_codes = []
+    session[:promo_codes].each { |promo_code| @promo_codes << PromoCode.find(promo_code['id']) }
     @promo_code = PromoCode.new
     @mmc_vendors = MmcVendor.all
     @mmc_categories = MmcCategory.all
@@ -20,17 +23,33 @@ class PromoCodesController < ApplicationController
 
   def create
     @promo_code = PromoCode.new(promo_code_params)
-
-    promo_code_string = "URL MMC Department Channel Program Prefix Friendly_Name Reporting_Channel \n"
-    promo_code_string += "#{@promo_code.base_url}"
-
-
     respond_to do |format|
       if @promo_code.save
+        session[:promo_codes] << @promo_code
         format.html { redirect_to @promo_code, notice: 'Promocode was successfully create.' }
       else
-        format.html { render :new }
+        format.html { redirect_to :new, notice: 'Oops, unable to properly save promo_code'}
       end
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @promo_code.update(pc_appended_url_params)
+        format.html { redirect_to @promo_code, notice: 'Promocode was successfully updated.' }
+      else
+        format.html { redirect_to :back, notice: 'Oops, unable to properly save promo_code'}
+      end
+    end
+  end
+
+  def destroy
+    @promo_code.destroy
+    respond_to do |format|
+      format.html { redirect_to :root, notice: 'Promocode was successfully destroyed'}
     end
   end
 
@@ -71,6 +90,14 @@ class PromoCodesController < ApplicationController
                                           :notes, :reporting_channel,
                                           :pc_department_id, :pc_channel_id,
                                           :pc_program_id)
+    end
+
+    def pc_appended_url_params
+      params.require(:promo_code).permit(:pc_appended_url)
+    end
+
+    def set_promo_code
+      @promo_code = PromoCode.find(params[:id])
     end
 
 end

@@ -1,0 +1,16 @@
+<h1>Promo Codes</h1>
+<h3><%= link_to 'Generate Snippet', new_promo_code_path %></h3>
+<ul class="list-group">
+<% @promo_codes.each do |promo_code| %>
+  <li class="list-group-item">
+    <div class="row">
+      <%= link_to promo_code.friendly_name, promo_code_path(promo_code), class: 'col-md-2' %>
+      <div class="col-md-2"><%= promo_code.id %></div>
+      <div class="col-md-2">
+        <%= button_to "Delete Promocode", promo_code, method: 'delete', data: {confirm: "You Sure?"} %>
+      </div>
+    </div>
+
+   </li>
+   <% end %>
+ </ul>

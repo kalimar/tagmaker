@@ -1,5 +1,19 @@
-<h1>Promo Code Snippet</h1>
-<%= @promo_code.mmc_code %>
-</br>
+<h1><%= @promo_code.friendly_name %></h1>
+<div class="row">
+  <%= button_to "Delete Promocode", @promo_code, method: 'delete', data: {confirm: "You Sure?"}, class: 'btn btn-danger' %>
+</div>
+<div class="well "><%= @promo_code.mmc_code%></div>
+
+<div class="row">
+<% if @promo_code.pc_appended_url %>
+    <span class="pc-appended-url"><%= @promo_code.pc_appended_url %></span>
+    <% else %>
+      <%= form_for(@promo_code, html: { class: "form-horizontal"}) do |f| %>
+      <div class="form-group">
+        <label for="pc_appended_url">Promo Code URL</label>
+        <%= f.text_field :pc_appended_url, placeholder: "Full url", class: "form-control" %>
+      </div>
+      <%= f.submit('Update Promocode', class: 'btn btn-default') %>
+      <% end %>
 <% end %>
-<%= @promo_code.notes %>
+</div>
