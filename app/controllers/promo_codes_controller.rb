@@ -26,9 +26,9 @@ class PromoCodesController < ApplicationController
     respond_to do |format|
       if @promo_code.save
         session[:promo_codes] << @promo_code
-        format.html { redirect_to @promo_code, notice: 'Promocode was successfully create.' }
+        format.html { redirect_to  '/sessions/new', notice: 'Promocode was successfully create.' }
       else
-        format.html { redirect_to :new, notice: 'Oops, unable to properly save promo_code'}
+        format.html { redirect_to '/sessions/new', notice: 'Oops, unable to properly save promo_code'}
       end
     end
   end
@@ -39,9 +39,9 @@ class PromoCodesController < ApplicationController
   def update
     respond_to do |format|
       if @promo_code.update(pc_appended_url_params)
-        format.html { redirect_to @promo_code, notice: 'Promocode was successfully updated.' }
+        format.html { redirect_to '/sessions/show', notice: 'Promocode was successfully updated.' }
       else
-        format.html { redirect_to :back, notice: 'Oops, unable to properly save promo_code'}
+        format.html { redirect_to '/sessions/show', notice: 'Oops, unable to properly save promo_code'}
       end
     end
   end

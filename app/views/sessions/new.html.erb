@@ -1,0 +1,98 @@
+<div class="page-header">
+  <h2>This is where you generate multiple promocodes</h2>
+</div>
+
+<%= form_for @promo_code do |f| %>
+<div class="form-group">
+  <label for="friendly_name">Friendly Name</label>
+  <%= f.text_field :friendly_name, {placeholder: "Name your promo code", class: "form-control"} %>
+</div>
+<div class="form-group">
+  <label for="base_url">Base URL</label>
+  <%= f.text_field :base_url, {placeholder: "Base Url", class:"form-control"} %>
+</div>
+
+<%= f.collection_select(:mmc_vendor_id, @mmc_vendors, :id, :name, {prompt: "Select an MMC Vendor"}, {id: "mmc_vendors_select"}) %>
+
+<%= f.collection_select(:mmc_category_id, @mmc_categories, :id, :name, {prompt: "Select an MMC Category"}, {id: "mmc_categories_select"}) %>
+
+<%= f.collection_select(:mmc_placement_id, @mmc_placements, :id, :name, {prompt: "Select an MMC Placement"}, {id: "mmc_placements_select"}) %>
+
+<%= f.collection_select(:mmc_item_id, @mmc_items, :id, :name, {prompt: "Select an MMC Item"}, {id: "mmc_items_select"}) %>
+</br>
+
+<%= f.collection_select(:pc_department_id, @pc_departments, :id, :name, {prompt: "Select a PC Department"}, {id: "pc_departments_select"}) %>
+
+<%= f.collection_select(:pc_channel_id, @pc_channels, :id, :name, {prompt: "Select a PC Channel"}, {id: "pc_channels_select"}) %>
+
+<%= f.collection_select(:pc_program_id, @pc_programs, :id, :name, {prompt: "Select a PC Program"}, {id: "pc_programs_select"}) %>
+</br>
+</br>
+<%= f.text_area :notes, {placeholder: "Notes"} %>
+</br>
+<div class="row"><%= f.submit class: 'btn btn-primary' %>
+  </div><% end %>
+
+<% if session[:promo_codes].length > 0 %>
+  <legend>Promo Codes</legend>
+  <% @promo_codes.each do |promo_code| %>
+  <div class="row">
+    <div class="col-sm-4"><%= promo_code.friendly_name %></div>
+    <div class="col-sm-8"><%= promo_code.mmc_code %></div>
+  </div>
+
+  <% end %>
+  <div class="row">
+    <%= link_to 'Generate Snippet', '/sessions/show', class: 'btn btn-default' %>
+  </div>
+  <% end %>
+
+<script>
+$(document).ready(function() {
+  $('#mmc_vendors_select').change(function(){
+    $.ajax({
+      url: "<%= update_mmc_categories_path %>",
+      data: {
+        mmc_vendors_id : $('#mmc_vendors_select').val()
+      },
+      dataType: "script"
+    });
+  });
+  $('#mmc_categories_select').change(function(){
+    $.ajax({
+      url: "<%= update_mmc_placements_path %>",
+      data: {
+        mmc_categories_id : $('#mmc_categories_select').val()
+      },
+      dataType: "script"
+    });
+  });
+  $('#mmc_placements_select').change(function(){
+    $.ajax({
+      url: "<%= update_mmc_items_path %>",
+      data: {
+        mmc_placements_id : $('#mmc_placements_select').val()
+      },
+      dataType: "script"
+    });
+  });
+  $('#pc_departments_select').change(function(){
+    $.ajax({
+      url: "<%= update_pc_channels_path %>",
+      data: {
+        pc_departments_id : $('#pc_departments_select').val()
+      },
+      dataType: "script"
+    });
+  });
+  $('#pc_channels_select').change(function(){
+    $.ajax({
+      url: "<%= update_pc_programs_path %>",
+      data: {
+        pc_channels_id : $('#pc_channels_select').val()
+      },
+      dataType: "script"
+    });
+  });
+});
+</script>

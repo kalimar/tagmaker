@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   get 'promo_codes/update_pc_programs', :as => 'update_pc_programs'
 
   resources :promo_codes
-  root :to => "promo_codes#index"
+  resources :sessions
+  root :to => "sessions#index"
 end
